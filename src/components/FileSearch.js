@@ -83,4 +83,8 @@ FileSearch.propTypes = {
     onFileSearch:PropTypes.func.isRequired,
 };
 
+FileSearch.defaultProps = {
+    title:'eMarkdown'
+};
+
 export default FileSearch;
