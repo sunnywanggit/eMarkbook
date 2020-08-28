@@ -1,8 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const FileSearch = ({title, onFileSearch}) => {
     const [inputActive, setInputActive] = useState(false);
     let [value, setValue] = useState('');
+
+    const closeSearch=(event)=>{
+        event.preventDefault();
+        setInputActive(false);
+        setValue('')
+    };
+
+    useEffect(()=>{
+        const handleInputEvent=(event)=>{
+            console.log('value',event);
+            const {keyCode} = event;
+            if(keyCode === 13 && inputActive){
+                onFileSearch(value)
+            }else if(keyCode === 27 && inputActive){
+                closeSearch(event)
+            }
+        };
+        document.addEventListener('keyup',handleInputEvent);
+        return ()=>{
+            document.removeEventListener('keyup',handleInputEvent)
+        }
+    });
+
     return (
         <div className="alert alert-primary">
             {
@@ -28,7 +51,7 @@ const FileSearch = ({title, onFileSearch}) => {
                         <button
                             type="button"
                             className="btn btn-primary col-4"
-                            onClick={()=>{setInputActive(false)}}
+                            onClick={closeSearch}
                         >
                             关闭
                         </button>

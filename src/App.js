@@ -10,7 +10,7 @@ function App() {
           <div className="col-3 bg-danger left-panel">
               <FileSearch
                   title="eMarkdown"
-                  onFileSearch={()=>{}}
+                  onFileSearch={(value)=>{console.log(value);}}
               />
           </div>
           <div className="col-9 bg-primary right-panel">this is the right panel</div>
