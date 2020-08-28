@@ -1,4 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const FileSearch = ({title, onFileSearch}) => {
     const [inputActive, setInputActive] = useState(false);
@@ -16,6 +18,7 @@ const FileSearch = ({title, onFileSearch}) => {
         setInputActive(true);
     };
 
+    //按下 enter 查找搜索结果 按下 esc 退出搜索
     useEffect(()=>{
         const handleInputEvent=(event)=>{
             console.log('value',event);
@@ -32,6 +35,7 @@ const FileSearch = ({title, onFileSearch}) => {
         }
     });
 
+    //点击搜索 input 自动完成聚焦
     useEffect(()=>{
         if(inputActive){
             inputElement.current.focus();
@@ -49,7 +53,10 @@ const FileSearch = ({title, onFileSearch}) => {
                         className="btn btn-primary"
                         onClick={searchInputActive}
                     >
-                        搜索
+                        <FontAwesomeIcon icon={faSearch}
+                                         title="搜索"
+                        />
+
                     </button>
                 </div>
             }
