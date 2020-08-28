@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const FileSearch = ({title, onFileSearch}) => {
     const [inputActive, setInputActive] = useState(false);
@@ -8,6 +8,12 @@ const FileSearch = ({title, onFileSearch}) => {
         event.preventDefault();
         setInputActive(false);
         setValue('')
+    };
+
+    const inputElement = useRef(null);
+
+    const searchInputActive=()=>{
+        setInputActive(true);
     };
 
     useEffect(()=>{
@@ -26,6 +32,12 @@ const FileSearch = ({title, onFileSearch}) => {
         }
     });
 
+    useEffect(()=>{
+        if(inputActive){
+            inputElement.current.focus();
+        }
+    },[inputActive]);
+
     return (
         <div className="alert alert-primary">
             {
@@ -35,7 +47,7 @@ const FileSearch = ({title, onFileSearch}) => {
                     <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={()=>{setInputActive(true)}}
+                        onClick={searchInputActive}
                     >
                         搜索
                     </button>
@@ -47,6 +59,7 @@ const FileSearch = ({title, onFileSearch}) => {
                         <input className="form-control col-8"
                                value={value}
                                onChange={(e)=>{setValue(value = e.target.value)}}
+                               ref={inputElement}
                         />
                         <button
                             type="button"
