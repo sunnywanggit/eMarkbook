@@ -3,41 +3,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit,faTrash,faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons'
 import PropTypes from 'prop-types';
+import useKeyPress from "../hooks/useKeyPress";
 
 const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
 
     const [editStatus,setEditStatus] = useState(false);
     const [value,setValue] = useState('');
+    const enterPressed = useKeyPress(13);
+    const escPressed = useKeyPress(27);
+
     const inputElement = useRef(null)
 
-    const closeSearch = (e)=>{
-        e.preventDefault()
+    const closeSearch = ()=>{
         setEditStatus(false)
         setValue('')
     }
 
     useEffect(()=>{
-        const handleInputEvent=(event)=>{
-            const {keyCode} = event;
-            if(keyCode === 13 && editStatus){
-                const editItem = files.find(file => file.id === editStatus);
-                onSaveEdit(editItem.id,value)
-                setEditStatus(false)
-                setValue('')
-            }else if(keyCode === 27 && editStatus){
-                closeSearch(event)
-            }
-        };
-        document.addEventListener('keyup',handleInputEvent);
-        return ()=>{
-            document.removeEventListener('keyup',handleInputEvent)
+        if(escPressed && editStatus){
+            const editItem = files.find(file => file.id === editStatus);
+            onSaveEdit(editItem.id,value)
+            setEditStatus(false)
+            setValue('')
         }
+
+        if(escPressed && editStatus){ closeSearch() }
     });
 
     useEffect(()=>{
-        if(editStatus){
-            inputElement.current.focus();
-        }
+        if(editStatus){ inputElement.current.focus(); }
     },[editStatus]);
 
     return(

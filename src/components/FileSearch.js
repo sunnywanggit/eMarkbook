@@ -2,45 +2,32 @@ import React, {useEffect, useRef, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch,faTimes } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
+import useKeyPress from "../hooks/useKeyPress";
 
 const FileSearch = ({title, onFileSearch}) => {
     const [inputActive, setInputActive] = useState(false);
     let [value, setValue] = useState('');
+    const enterPressed = useKeyPress(13);
+    const escPressed = useKeyPress(27);
 
-    const closeSearch=(event)=>{
-        event.preventDefault();
+    const closeSearch=()=>{
         setInputActive(false);
         setValue('')
     };
 
     const inputElement = useRef(null);
 
-    const searchInputActive=()=>{
-        setInputActive(true);
-    };
+    const searchInputActive=()=>{ setInputActive(true); };
 
     //按下 enter 查找搜索结果 按下 esc 退出搜索
     useEffect(()=>{
-        const handleInputEvent=(event)=>{
-            console.log('value',event);
-            const {keyCode} = event;
-            if(keyCode === 13 && inputActive){
-                onFileSearch(value)
-            }else if(keyCode === 27 && inputActive){
-                closeSearch(event)
-            }
-        };
-        document.addEventListener('keyup',handleInputEvent);
-        return ()=>{
-            document.removeEventListener('keyup',handleInputEvent)
-        }
+        if(enterPressed && inputActive){ onFileSearch(value) }
+        if(escPressed && inputActive){ closeSearch() }
     });
 
     //点击搜索 input 自动完成聚焦
     useEffect(()=>{
-        if(inputActive){
-            inputElement.current.focus();
-        }
+        if(inputActive){ inputElement.current.focus(); }
     },[inputActive]);
 
     return (
