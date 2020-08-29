@@ -1,10 +1,45 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEdit,faTrash,faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons'
 import PropTypes from 'prop-types';
 
 const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
+
+    const [editStatus,setEditStatus] = useState(false);
+    const [value,setValue] = useState('');
+    const inputElement = useRef(null)
+
+    const closeSearch = (e)=>{
+        e.preventDefault()
+        setEditStatus(false)
+        setValue('')
+    }
+
+    useEffect(()=>{
+        const handleInputEvent=(event)=>{
+            const {keyCode} = event;
+            if(keyCode === 13 && editStatus){
+                const editItem = files.find(file => file.id === editStatus);
+                onSaveEdit(editItem.id,value)
+                setEditStatus(false)
+                setValue('')
+            }else if(keyCode === 27 && editStatus){
+                closeSearch(event)
+            }
+        };
+        document.addEventListener('keyup',handleInputEvent);
+        return ()=>{
+            document.removeEventListener('keyup',handleInputEvent)
+        }
+    });
+
+    useEffect(()=>{
+        if(editStatus){
+            inputElement.current.focus();
+        }
+    },[editStatus]);
+
     return(
         <ul className="list-group list-group-flush file-list">
             {
@@ -13,27 +48,51 @@ const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
                         className="list-group-item bg-light row d-flex align-items-center file-item"
                         key={file.id}
                     >
-                        <span className="col-2">
+                    {
+                        (file.id !== editStatus) &&
+                        <>
+                            <span className="col-2">
                             <FontAwesomeIcon icon={faMarkdown} size="lg" title="markdown" />
-                        </span>
+                            </span>
 
-                        <span className="col-8">{file.title}</span>
+                            <span className="col-8 c-link"
+                            onClick={()=>{setEditStatus(file.id) ;setValue(file.title)}}
+                            >{file.title}</span>
 
-                        <button
+                            <button
                             type="button"
                             className="icon-button col-1"
-                            onClick={()=>{}}
-                        >
+                            onClick={()=>{setEditStatus(file.id);setValue(file.title)}}
+                            >
                             <FontAwesomeIcon icon={faEdit} size="lg" title="编辑" />
-                        </button>
+                            </button>
 
-                        <button
+                            <button
                             type="button"
                             className="icon-button col-1"
-                            onClick={()=>{}}
-                        >
+                            onClick={()=>{onFileDelete(file.id)}}
+                            >
                             <FontAwesomeIcon icon={faTrash} size="lg" title="删除" />
-                        </button>
+                            </button>
+                        </>
+                        }
+                        {
+                            (file.id === editStatus) &&
+                            <>
+                                <input className="form-control col-10"
+                                       value={value}
+                                       ref={inputElement}
+                                       onChange={(e)=>{setValue(e.target.value)}}
+                                />
+                                <button
+                                    type="button"
+                                    className="icon-button col-2"
+                                    onClick={closeSearch}
+                                >
+                                    <FontAwesomeIcon icon={faTimes} size="lg" title="关闭" />
+                                </button>
+                            </>
+                        }
                     </li>
                 ))
             }
@@ -42,8 +101,10 @@ const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
 };
 
 FileList.propTypes = {
-    files:PropTypes.array
-
+    files:PropTypes.array,
+    onFileClick:PropTypes.func,
+    onFileDelete:PropTypes.func,
+    onSaveEdit:PropTypes.func
 };
 
 export default FileList;

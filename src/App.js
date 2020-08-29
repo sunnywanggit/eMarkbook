@@ -15,9 +15,9 @@ function App() {
                   onFileSearch={(value)=>{console.log(value);}}
               />
               <FileList files={defaultFiles}
-                        onFileClick={()=>{}}
-                        onFileDelete={()=>{}}
-                        onSaveEdit={()=>{}}
+                        onFileClick={(id)=>{console.log(id);}}
+                        onFileDelete={(id)=>{console.log('delete',id);}}
+                        onSaveEdit={(id,newValue)=>{ console.log(id,newValue);}}
               />
           </div>
           <div className="col-9 bg-primary right-panel">this is the right panel</div>
