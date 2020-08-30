@@ -2,44 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ddbf4218-d80e-4f02-b709-4ed9b55e15e6" name="默认更改列表" comment="search input 自动聚焦">
+      <change afterPath="$PROJECT_DIR$/src/hooks/useKeyPress.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ComponentName.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FileList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FileList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FileSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FileSearch.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="e3" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
   <component name="ProjectId" id="1giqsY68p84fLxE9wF2O0RGmiLp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -52,6 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1598607967777</updated>
       <workItem from="1598607968931" duration="13229000" />
+      <workItem from="1598723728853" duration="693000" />
     </task>
     <task id="LOCAL-00001" summary="cross-env BROWSER=none npm start 仅仅打开 electron 窗口，阻止浏览器窗口打开">
       <created>1598611507168</created>
@@ -134,7 +131,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -146,8 +143,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="cross-env BROWSER=none npm start 仅仅打开 electron 窗口，阻止浏览器窗口打开" />
     <MESSAGE value="项目结构搭建完成" />
     <MESSAGE value="引入样式文件" />
@@ -160,5 +161,15 @@
     <MESSAGE value="为属性添加默认值" />
     <MESSAGE value="FileList 基本样式完成" />
     <option name="LAST_COMMIT_MESSAGE" value="FileList 基本样式完成" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="521" y="202" key="FileChooserDialogImpl" timestamp="1598724565692">
+      <screen x="0" y="0" width="1463" height="874" />
+    </state>
+    <state x="521" y="202" key="FileChooserDialogImpl/0.0.1463.874@0.0.1463.874" timestamp="1598724565692" />
+    <state x="242" y="91" key="SettingsEditor" timestamp="1598723869630">
+      <screen x="0" y="0" width="1463" height="874" />
+    </state>
+    <state x="242" y="91" key="SettingsEditor/0.0.1463.874@0.0.1463.874" timestamp="1598723869630" />
   </component>
 </project>
