@@ -8,7 +8,8 @@ import BottomBtn from './components/BottomBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus} from '@fortawesome/free-solid-svg-icons'
 import TabList from './components/TabList';
-
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 function App() {
   return (
     <div className="App container-fluid px-0">
@@ -48,6 +49,13 @@ function App() {
               unsaveIds={['1']}
               onTabClick={(id)=>{console.log(id)}}
               onCloseTab={()=>{console.log('on-close-tab')}}
+            />
+            <SimpleMDE
+              value={defaultFiles[1].body}
+              onChange={(value)=>{console.log(value)}}
+              options={{
+                minHeight:'515px'
+              }}
             />
           </div>
       </div>
