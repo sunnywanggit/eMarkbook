@@ -7,6 +7,7 @@ import defaultFiles from './utils/defaultFiles';
 import BottomBtn from './components/BottomBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus} from '@fortawesome/free-solid-svg-icons'
+import TabList from './components/TabList';
 
 function App() {
   return (
@@ -40,7 +41,15 @@ function App() {
 
               </div>
           </div>
-          <div className="col-9 bg-primary right-panel">this is the right panel</div>
+          <div className="col-9 right-panel">
+            <TabList
+              files={defaultFiles}
+              activeId='1'
+              unsaveIds={['1']}
+              onTabClick={(id)=>{console.log(id)}}
+              onCloseTab={()=>{console.log('on-close-tab')}}
+            />
+          </div>
       </div>
     </div>
   );
