@@ -4,11 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import FileSearch from './components/FileSearch';
 import FileList from './components/FileList';
 import defaultFiles from './utils/defaultFiles';
+import BottomBtn from './components/BottomBtn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus} from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   return (
-    <div className="App container-fluid">
-      <div className="row">
+    <div className="App container-fluid px-0">
+      <div className="row no-gutters">
           <div className="col-3 left-panel">
               <FileSearch
                   title="eMarkdown"
@@ -19,6 +22,23 @@ function App() {
                         onFileDelete={(id)=>{console.log('delete',id);}}
                         onSaveEdit={(id,newValue)=>{ console.log(id,newValue);}}
               />
+              <div className="row no-gutters">
+                <div className="col">
+                  <BottomBtn
+                    text="新建"
+                    colorClass="btn-primary"
+                    icon={faPlus}
+                  />
+                </div>
+                <div className="col">
+                  <BottomBtn
+                    text="导入"
+                    colorClass="btn-success"
+                    icon={faPlus}
+                  />
+                </div>
+
+              </div>
           </div>
           <div className="col-9 bg-primary right-panel">this is the right panel</div>
       </div>

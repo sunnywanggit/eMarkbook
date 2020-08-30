@@ -31,7 +31,7 @@ const FileSearch = ({title, onFileSearch}) => {
     },[inputActive]);
 
     return (
-        <div className="alert alert-primary d-flex justify-content-between align-items-center">
+        <div className="alert alert-primary d-flex justify-content-between align-items-center mb-0">
             {
                 !inputActive &&
                 <>
@@ -49,9 +49,9 @@ const FileSearch = ({title, onFileSearch}) => {
                 inputActive&&
                     <>
                         <input className="form-control"
-                               value={value}
-                               onChange={(e)=>{setValue(value = e.target.value)}}
-                               ref={inputElement}
+                            value={value}
+                            onChange={(e)=>{setValue(value = e.target.value)}}
+                            ref={inputElement}
                         />
                         <button
                             type="button"
