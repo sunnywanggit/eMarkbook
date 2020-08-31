@@ -15,6 +15,7 @@ function App() {
   const [activeFileId,setActiveFileId] = useState('')
   const [openedFileIds,setOpenedFileIds] = useState([])
   const [unSavedIds,setUnSavedIds] = useState([])
+  const [searchFiles,setSearchFiles] = useState([])
 
   const openedFiles = openedFileIds.map(openId=>{
     return files.find(file=>file.id === openId)
@@ -22,7 +23,68 @@ function App() {
 
   const activeFile = files.find(file=>file.id === activeFileId)
 
-  console.log('openedFiles',openedFiles)
+  const fileClick = (fileId)=>{
+    //set current file
+    setActiveFileId(fileId)
+    //if opened files dont't have current id
+
+    if(!openedFileIds.includes(fileId)){
+      //set opened file id
+      setOpenedFileIds([...openedFileIds,fileId])
+    }
+  }
+
+  const tabClick=(fileId)=>{
+    setActiveFileId(fileId)
+  }
+
+  const closeTab=(fileId)=>{
+    //remove current id form openedFileIds
+    const tabsWithout = openedFileIds.filter(id => id !== fileId)
+    setOpenedFileIds(tabsWithout)
+    //set active to the first opeded tab if still tabs left
+    if(tabsWithout.length > 0){
+      setActiveFileId(tabsWithout[0])
+    }else{
+      setActiveFileId('')
+    }
+  }
+
+  const fileChange=(id,value)=>{
+    const newFiles = files.map(file=>{
+      if(file.id === id){ file.body = value }
+      return file
+    })
+    setFiles(newFiles)
+    setUnSavedIds(...unSavedIds,id)
+  }
+
+  const fileDelete=(id)=>{
+    const newFiles = files.filter(file=>file.id !== id)
+    setFiles(newFiles)
+    //close the tab if open
+    closeTab(id)
+  }
+
+  const updateFileName=(id,newTitle)=>{
+    const newFiles = files.map(file=>{
+      if(file.id === id){
+        file.title = newTitle;
+      }
+      return file;
+    })
+    setFiles(newFiles)
+  }
+
+  const fileSearch=(keyword)=>{
+    console.log('fileSearsh')
+    const newFiles = files.filter(file=>file.title.includes(keyword))
+    console.log('newFiles',newFiles)
+    setSearchFiles(newFiles)
+  }
+
+  const fileListArr = (searchFiles.length > 0) ? searchFiles : files;
+
 
 
   return (
@@ -31,12 +93,12 @@ function App() {
           <div className="col-3 left-panel">
               <FileSearch
                   title="eMarkdown"
-                  onFileSearch={(value)=>{console.log(value);}}
+                  onFileSearch={fileSearch}
               />
-              <FileList files={files}
-                        onFileClick={(id)=>{console.log(id);}}
-                        onFileDelete={(id)=>{console.log('delete',id);}}
-                        onSaveEdit={(id,newValue)=>{ console.log(id,newValue);}}
+              <FileList files={fileListArr}
+                        onFileClick={fileClick}
+                        onFileDelete={fileDelete}
+                        onSaveEdit={updateFileName}
               />
               <div className="row no-gutters button-group">
                 <div className="col">
@@ -70,12 +132,13 @@ function App() {
                   files={openedFiles}
                   activeId={activeFileId}
                   unsaveIds={unSavedIds}
-                  onTabClick={(id)=>{console.log(id)}}
-                  onCloseTab={()=>{console.log('on-close-tab')}}
+                  onTabClick={tabClick}
+                  onCloseTab={closeTab}
                 />
                 <SimpleMDE
+                  key={activeFile && activeFile.id}
                   value={activeFile &&  activeFile.body}
-                  onChange={(value)=>{console.log(value)}}
+                  onChange={(value)=>{fileChange(activeFile.id,value)}}
                   options={{
                     minHeight:'515px'
                   }}

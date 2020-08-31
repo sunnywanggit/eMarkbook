@@ -50,7 +50,7 @@ const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
                             </span>
 
                             <span className="col-6 c-link"
-                            onClick={()=>{setEditStatus(file.id) ;setValue(file.title)}}
+                            onClick={()=>{onFileClick(file.id)}}
                             >{file.title}</span>
 
                             <button
@@ -74,9 +74,9 @@ const FileList = ({files,onFileClick,onSaveEdit,onFileDelete})=>{
                             (file.id === editStatus) &&
                             <>
                                 <input className="form-control col-10"
-                                       value={value}
-                                       ref={inputElement}
-                                       onChange={(e)=>{setValue(e.target.value)}}
+                                    value={value}
+                                    ref={inputElement}
+                                    onChange={(e)=>{setValue(e.target.value)}}
                                 />
                                 <button
                                     type="button"
